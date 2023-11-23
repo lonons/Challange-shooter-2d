@@ -1,14 +1,16 @@
 using System;
 using _Project._Scripts.HpSystem;
+using _Project._Scripts.WeaponSystem;
 using UnityEngine;
 using Mirror;
 
 public class PlayerController : NetworkBehaviour, IDamagable
 {
-
-    [SerializeField] private GameObject _bullet;
+    [SerializeField] private WeaponsConfig _weaponsConfig;
     [SerializeField] private GameObject _flashLightGO;
-    
+
+    private WeaponSystem _weaponSystem;
+ 
     private Rigidbody2D _rb;
 
     public float _speed = 10f;
@@ -28,6 +30,8 @@ public class PlayerController : NetworkBehaviour, IDamagable
         _rb = GetComponent<Rigidbody2D>();
         _hpSystem = new HpSystem();
         _mainCamera = Camera.main;
+        _weaponSystem = new WeaponSystem();
+        _weaponSystem.InitFirsteapon(_weaponsConfig.GetWeapon(WeaponEnum.Pistol));
     }
 
     private void Update()
@@ -35,11 +39,12 @@ public class PlayerController : NetworkBehaviour, IDamagable
         if (!isLocalPlayer) return;
         
         Move();
-        LookOnMouse();
         FireLogic();
     }
     private void FixedUpdate()
     {
+        if (!isLocalPlayer) return;
+        LookOnMouse();
         _rb.MovePosition(_rb.position + input * _speed / 100);
     }
 
@@ -54,7 +59,7 @@ public class PlayerController : NetworkBehaviour, IDamagable
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            SpawnBullet();
+            _weaponSystem.Fire();
         }
     }
 
@@ -63,14 +68,6 @@ public class PlayerController : NetworkBehaviour, IDamagable
         var position = _rb.position;
         var newCameraPosition = new Vector3(position.x,position.y,_mainCamera.transform.position.z);
         _mainCamera.transform.position = newCameraPosition;
-    }
-    
-
-    [Command]
-    private void SpawnBullet()
-    {
-        var bullet = Instantiate(_bullet, _rb.position, Quaternion.AngleAxis(angle,Vector3.forward));
-        NetworkServer.Spawn(bullet);
     }
 
     private void Move()
