@@ -132,31 +132,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 11456930}
-  - component: {fileID: 11456929}
   - component: {fileID: 11456931}
+  - component: {fileID: 11456932}
   m_Layer: 0
-  m_Name: ShootManager
+  m_Name: PoolsManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &11456929
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 11456928}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebb630851ecf45aa8cd54681955f3f3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
-  prefab: {fileID: 2938787105059413384, guid: 6972c3daa3b3cb845afbc1d72d818870, type: 3}
 --- !u!4 &11456930
 Transform:
   m_ObjectHideFlags: 0
@@ -189,6 +173,22 @@ MonoBehaviour:
   serverOnly: 0
   visible: 0
   hasSpawned: 0
+--- !u!114 &11456932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 11456928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 191f34171de74ce8ab23d32a005c1cef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  _bulletPrefab: {fileID: 2938787105059413384, guid: 6972c3daa3b3cb845afbc1d72d818870, type: 3}
 --- !u!1 &121815711
 GameObject:
   m_ObjectHideFlags: 0
