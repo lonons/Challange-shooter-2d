@@ -6,18 +6,15 @@ using UnityEngine;
 
 namespace _Project._Scripts.Pools
 {
-    public class PoolsManager : NetworkBehaviour
+    public class PoolsManager 
     {
         [SerializeField] private Projectile _bulletPrefab;
-        
-        public static PoolsManager Instance; 
         
         private List<PoolObjects<PoolableObject>> _listPools;
         private Transform _parentPools;
         
-        private void Awake()
+        public void PoolsManager()
         {
-            Instance = this;
             _listPools = new List<PoolObjects<PoolableObject>>();
             _parentPools = new GameObject() { name = "[POOLS]" }.transform;
             CreatePool("[BULLETS]", _bulletPrefab);
