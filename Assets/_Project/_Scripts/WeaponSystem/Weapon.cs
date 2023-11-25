@@ -1,4 +1,5 @@
 using System.Linq;
+using _Project._Scripts.Game;
 using _Project._Scripts.Pools;
 using Mirror;
 using Unity.Mathematics;
@@ -19,7 +20,7 @@ namespace _Project._Scripts.WeaponSystem
         [Command]
         private void CmdCreateBullet()
         {
-          PoolsManager.Instance.GetPool().TakeObject().Init();
+          GameController.Instance._bulletController.RequestBullet(_shootPoint.position,Quaternion.identity);
         }     
     }
 }

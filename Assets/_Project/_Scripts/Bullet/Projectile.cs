@@ -14,17 +14,10 @@ public class Projectile : PoolableObject
         _rb = GetComponent<Rigidbody2D>();
     }
 
-    private void Update()
+    [ClientRpc]
+    public override void Activate(Vector2 position, Quaternion quaternion)
     {
-        if (timer >= 2f) ;
-        else timer += Time.deltaTime;
-
-
-    }
-
-    public override void Init()
-    {
-        timer = 0f;
-       // _rb.AddForce(Vector2.up,ForceMode2D.Impulse);
+        _rb.position = position;
+        _rb.transform.rotation = quaternion;
     }
 }

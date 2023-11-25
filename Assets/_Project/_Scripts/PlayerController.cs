@@ -10,14 +10,17 @@ public class PlayerController : NetworkBehaviour, IDamagable
     [SerializeField] private GameObject _flashLightGO;
 
     private WeaponSystem _weaponSystem;
- 
     private Rigidbody2D _rb;
-
-    public float _speed = 10f;
-    private Vector2 input;
-    private float angle;
     private HpSystem _hpSystem;
     private Camera _mainCamera;
+
+    private Vector2 input;
+    
+    private float angle;
+    public float _speed = 10f;
+   
+ 
+    
 
     private void Start()
     {

@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace _Project._Scripts.Pools
 {
-    public abstract class PoolableObject : MonoBehaviour
+    public abstract class PoolableObject : NetworkBehaviour
     {
-        public abstract void Init();
+        public abstract void Activate(Vector2 position, Quaternion quaternion);
     }
 }

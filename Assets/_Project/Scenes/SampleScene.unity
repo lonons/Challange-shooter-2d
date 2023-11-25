@@ -185,6 +185,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8907d33986ef4788940e8fc64060dbb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  _bulletPrefab: {fileID: 2938787105059413384, guid: 6972c3daa3b3cb845afbc1d72d818870, type: 3}
 --- !u!1 &121815711
 GameObject:
   m_ObjectHideFlags: 0

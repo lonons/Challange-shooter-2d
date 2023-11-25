@@ -9,14 +9,19 @@ namespace _Project._Scripts.Game
     public class GameController : NetworkBehaviour
     {
         public static GameController Instance;
-        
+        public BulletController _bulletController { get; private set; }
+
         [SerializeField] private Projectile _bulletPrefab;
 
         private PoolsController _poolsController;
-        private BulletController _bulletController;
         private void Awake()
         {
             Instance = this;
+        }
+
+        private void Update()
+        {
+            
         }
 
         public override void OnStartServer()
@@ -26,18 +31,18 @@ namespace _Project._Scripts.Game
             InitPoolController();
             InitBulletController();
         }
-
-        [Server]
-        private void InitBulletController()
-        {
-            var pool = _poolsController.CreatePool("[BULLETS]",_bulletPrefab);
-        }
-
         [Server]
         private void InitPoolController()
         {
             _poolsController = new PoolsController();
             
         }
+        [Server]
+        private void InitBulletController()
+        {
+            var pool = _poolsController.CreatePool("[BULLETS]",_bulletPrefab);
+            _bulletController = new BulletController(pool);
+        }
+
     }
 }
