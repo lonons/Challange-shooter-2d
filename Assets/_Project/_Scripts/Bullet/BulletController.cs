@@ -16,21 +16,32 @@ namespace _Project._Scripts.Bullet
         {
             _activeBullets = new List<ActiveBullet>();
             _pool = pool;
+            GameController.Instance.MonoBehaviourMethods.AddMethod(this);
         }
        
         public void OnUpdate(float deltaTime)
         {
             if (_activeBullets.Count == 0) return;
+            var bulletsForDelete = new List<ActiveBullet>(); 
             foreach (var activeBullet in _activeBullets)
             {
-                activeBullet.TimerTick(deltaTime);
+                if (activeBullet.Activated)
+                    activeBullet.TimerTick(deltaTime);
+                else bulletsForDelete.Add(activeBullet);
+            }
+            
+            if (bulletsForDelete.Count == 0) return;
+            
+            foreach (var activeBullet in bulletsForDelete)
+            {
+                _activeBullets.Remove(activeBullet);
             }
         }
         [Server]
-        public void RequestBullet(Vector2 position,Quaternion quaternion)
+        public void RequestBullet(Vector2 position,float angle)
         {
             var bullet = _pool.TakeObject();
-            bullet.Activate(position,quaternion);
+            bullet.RpcActivate(position,angle);
             AddBullet(bullet);
         }
 
@@ -46,8 +57,10 @@ namespace _Project._Scripts.Bullet
         private void RemoveBullet(ActiveBullet activeBullet)
         {
             activeBullet.TimeLeft -= RemoveBullet;
-            _activeBullets.Remove(activeBullet);
+            activeBullet.Bullet.RpcDeActivate();
+            activeBullet.Activated = false;
             _pool.ReturnObject(activeBullet.Bullet);
         }
+        
     }
 }

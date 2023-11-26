@@ -62,7 +62,7 @@ public class PlayerController : NetworkBehaviour, IDamagable
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            _weaponSystem.Fire();
+            _weaponSystem.Fire(angle);
         }
     }
 

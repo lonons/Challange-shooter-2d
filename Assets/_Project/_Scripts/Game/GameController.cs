@@ -9,11 +9,14 @@ namespace _Project._Scripts.Game
     public class GameController : NetworkBehaviour
     {
         public static GameController Instance;
+        public MonoBehaviourMethodsController MonoBehaviourMethods { get; private set; }
         public BulletController _bulletController { get; private set; }
 
         [SerializeField] private Projectile _bulletPrefab;
 
         private PoolsController _poolsController;
+       
+
         private void Awake()
         {
             Instance = this;
@@ -21,16 +24,20 @@ namespace _Project._Scripts.Game
 
         private void Update()
         {
-            
+            if (!isServer) return;
+            MonoBehaviourMethods.OnUpdate();
         }
 
         public override void OnStartServer()
         {
             base.OnStartServer();
             
+            MonoBehaviourMethods = new MonoBehaviourMethodsController();
+            
             InitPoolController();
             InitBulletController();
         }
+        
         [Server]
         private void InitPoolController()
         {

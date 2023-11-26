@@ -17,9 +17,9 @@ public class WeaponSystem
     {
        
     }
-    public void Fire()
+    public void Fire(float angle)
     {
-        _currentWeapon.Fire();
+        _currentWeapon.Fire(angle);
     }
     
 }

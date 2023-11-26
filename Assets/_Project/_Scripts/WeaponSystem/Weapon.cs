@@ -12,15 +12,15 @@ namespace _Project._Scripts.WeaponSystem
         [SerializeField] private Transform _shootPoint;
         [SerializeField] private WeaponStatsConfig _weaponStats;
         
-        public void Fire()
+        public void Fire(float angle)
         {
-            CmdCreateBullet();
+            CmdCreateBullet(angle);
         }
 
         [Command]
-        private void CmdCreateBullet()
+        private void CmdCreateBullet(float angle)
         {
-          GameController.Instance._bulletController.RequestBullet(_shootPoint.position,Quaternion.identity);
+          GameController.Instance._bulletController.RequestBullet(_shootPoint.position,angle);
         }     
     }
 }

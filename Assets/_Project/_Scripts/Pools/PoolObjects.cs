@@ -23,7 +23,6 @@ namespace _Project._Scripts.Pools
         {
             var obj = GameObject.Instantiate(_prefab, _poolParent);
             NetworkServer.Spawn(obj.gameObject);
-            obj.gameObject.SetActive(false);
             _poolQuery.Enqueue(obj);
         }
         
@@ -33,7 +32,6 @@ namespace _Project._Scripts.Pools
             if (_poolQuery.Count == 0)  CreateObject();
             
             var obj = _poolQuery.Dequeue();
-            obj.gameObject.SetActive(true);
 
             return obj;
         }
@@ -41,8 +39,9 @@ namespace _Project._Scripts.Pools
         [Server]
         public void ReturnObject(T obj)
         {
-            obj.gameObject.SetActive(false);
             _poolQuery.Enqueue(obj);
         }
+
+        
     }
 }

@@ -5,6 +5,7 @@ namespace _Project._Scripts.Pools
 {
     public abstract class PoolableObject : NetworkBehaviour
     {
-        public abstract void Activate(Vector2 position, Quaternion quaternion);
+        public abstract void RpcActivate(Vector2 position,float angle);
+        public abstract void RpcDeActivate();
     }
 }
